@@ -1,20 +1,17 @@
-import {  CardMedia, Typography, useTheme } from '@mui/material';
+import {  CardMedia, Grid, Typography } from '@mui/material';
 import cybellumSign from 'assets/images/login/cybellum-sign.svg';
-import { StyledGridHeaderContainer, StyledHeaderIconWrapper } from './loginHeader.styled';
+import { StyledHeaderIconWrapper } from './loginHeader.styled';
 
 export default function LoginHeader() {
 
-
-  const theme = useTheme();
-
   return (
-        <StyledGridHeaderContainer>
+        <Grid>
             <StyledHeaderIconWrapper>
                 <CardMedia component="img" alt="Cybellum" image={cybellumSign} />
             </StyledHeaderIconWrapper>
-            <Typography variant='h2' sx={{ marginBottom: theme.spacing(2) }}>
-            Welcome to the Product Security Platform
+            <Typography sx={{ fontSize:56, fontWeight:300, lineHeight:1.15 }}>
+              Welcome to the<br/>Product Security Platform
             </Typography>
-        </StyledGridHeaderContainer>
+        </Grid>
   );
 }

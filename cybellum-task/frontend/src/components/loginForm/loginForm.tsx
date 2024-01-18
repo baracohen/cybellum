@@ -10,6 +10,7 @@ import { accessTokenSelector, userSlice } from 'slices/user/userSlice';
 import { useAppSelector } from 'app/hooks';
 import { StyledErrorMsg, StyledLoginBtn, StyledTextField, StyledForgotPassBtn } from './loginForm.styled';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import theme from 'themes/default';
 
 export default function LoginForm() {
   const { register, handleSubmit , formState: { errors } } = useForm<FormInputs>({
@@ -54,32 +55,37 @@ export default function LoginForm() {
   
 
   return (
-      <form onSubmit={handleSubmit((data) => onSubmit(data))}>
-          <StyledTextField
-            error={!!errors.email || apiError}
-            label="User Name"
-            {...register('email')}
-            InputProps={{
-              endAdornment: (!!errors.email || apiError) && <ErrorOutlineIcon color='error' />
-            }}
-          />
-          {errors.email && <StyledErrorMsg>{errors.email.message}</StyledErrorMsg>}
+        <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+            <StyledTextField
+              error={!!errors.email || apiError}
+              label="User Name"
+              {...register('email')}
+              InputProps={{
+                endAdornment: (!!errors.email || apiError) && <ErrorOutlineIcon color='error' />,
+              }}
+            />
+            {errors.email && <StyledErrorMsg>{errors.email.message}</StyledErrorMsg>}
 
-          <StyledTextField 
+            <StyledTextField
               error={apiError}
               label="Password"
-              type="password" {...register('password')}     
+              type="password" {...register('password')}
+              InputLabelProps={{
+                sx: {
+                  marginTop: theme.spacing(3.5)
+                }
+              }
+              }
               InputProps={{
-                  endAdornment: apiError && <ErrorOutlineIcon color='error' />
-                }} 
+                endAdornment: apiError && <ErrorOutlineIcon color='error' />
+              }}
             />
-          {apiError && <StyledErrorMsg>The email or password you entered don't match</StyledErrorMsg>}
-
-          <StyledForgotPassBtn>Forgot your password?</StyledForgotPassBtn>
-          <StyledLoginBtn type="submit" variant="contained" fullWidth>
-            Log in
-          </StyledLoginBtn>
-      </form>
+            {apiError && <StyledErrorMsg>The email or password you entered don't match</StyledErrorMsg>}
+            <StyledForgotPassBtn>Forgot your password?</StyledForgotPassBtn>
+            <StyledLoginBtn type="submit" fullWidth>
+              Log in
+            </StyledLoginBtn>
+        </form>
   );
 }
 

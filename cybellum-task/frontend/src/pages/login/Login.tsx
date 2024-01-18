@@ -2,7 +2,7 @@ import { CardMedia, Stack, Grid } from '@mui/material';
 import monitor from 'assets/images/login/imac-dig-twins.png';
 import LoginForm from 'components/loginForm/loginForm';
 import LoginHeader from 'components/loginHeader/loginHeader';
-import { StyledLeftGridHeaderContainer, StyledStackLinkWrapper, StyledLinkBtn } from './login.styled';
+import { StyledLeftGridHeaderContainer, StyledGridLinkWrapper, StyledLinkBtn } from './login.styled';
 import { StyledGridFormContainer } from 'components/loginForm/loginForm.styled';
 
 export default function Login() {
@@ -13,26 +13,24 @@ export default function Login() {
   };
 
   return (
-      <Stack sx={{ p: 20, flexDirection: { xs: 'column', md: 'row' } }}>
-        <Grid container spacing={2}>
-          <StyledLeftGridHeaderContainer item xs={12} md={6} >
+      <Stack sx={{ p:20, flexDirection: { xs: 'column', md: 'column' } }}>
+        <Grid container spacing={2} display={'flex'}>
+          <StyledLeftGridHeaderContainer  item xs={12} md={6} sm={12} sx={{}}>
             <LoginHeader/>
-            <StyledGridFormContainer container direction="column">
-              <Grid>
+            <StyledGridFormContainer container direction="column" xs={12} md={6} sm={12}>
                 <LoginForm />
-                <StyledStackLinkWrapper >
+            </StyledGridFormContainer>
+          </StyledLeftGridHeaderContainer>
+          <Grid item xs={12} md={6} sm={12}>
+            <CardMedia component="img" alt="Digital Twins" image={monitor}  />
+          </Grid>
+          <StyledGridLinkWrapper xs={3} md={3} sm={3} lg={3}>
                   {Object.keys(bottomLinks).map((link) => (
                     <StyledLinkBtn key={link}>
                       {link}
                     </StyledLinkBtn>
                   ))}
-                </StyledStackLinkWrapper>
-              </Grid>
-            </StyledGridFormContainer>
-          </StyledLeftGridHeaderContainer>
-          <Grid item xs={12} md={6}>
-            <CardMedia component="img" alt="Digital Twins" image={monitor}  />
-          </Grid>
+          </StyledGridLinkWrapper>
         </Grid>
       </Stack>
   );
